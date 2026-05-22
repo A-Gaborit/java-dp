@@ -32,6 +32,21 @@ public class Reservation {
     }
 
     /**
+     *
+     * @param date la date de la réservation
+     * @param nbPlaces le nombre de places
+     */
+    public Reservation(LocalDateTime date, int nbPlaces) {
+        super();
+        this.date = date;
+        this.nbPlaces = nbPlaces;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
      * Getter
      *
      * @return the date
@@ -101,5 +116,19 @@ public class Reservation {
      */
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    /**
+     * Calcule et applique le montant total de la réservation selon le type et le statut du client
+     *
+     * @param type le type de réservation contenant le montant et la réduction
+     */
+    public void calculerTotal(TypeReservation type) {
+        double total = type.getMontant() * nbPlaces;
+        if (client.isPremium()) {
+            this.setTotal(total * (1 - type.getReductionPourcent() / 100.0));
+        } else {
+            this.setTotal(total);
+        }
     }
 }

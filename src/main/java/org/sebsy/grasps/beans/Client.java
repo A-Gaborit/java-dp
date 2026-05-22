@@ -3,6 +3,7 @@ package org.sebsy.grasps.beans;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,4 +81,22 @@ public class Client {
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
+
+    /**
+     * Ajoute une réservation au client
+     *
+     * @param reservation la réservation à ajouter
+     */
+    public void ajouterReservation(Reservation reservation) {
+        reservation.setClient(this);
+    }
+
+    /**
+     * Supprime une réservation du client
+     *
+     * @param reservation la réservation à supprimer
+     */
+    public void removeReservation(Reservation reservation) {
+        reservation.setClient(null);
+     }
 }
